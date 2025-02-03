@@ -26,9 +26,9 @@ export default function Template({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-start h-full w-full bg-background px-24 py-12">
-      <NavigationMenu items={navigationItems} />
-      <div className="flex-col items-center justify-start h-full w-full my-32 mx-24">
+    <div className="flex flex-col items-center justify-center h-full w-full bg-background py-12">
+      <div className="flex flex-col items-start justify-center h-full w-fit gap-16">
+        <NavigationMenu items={navigationItems} />
         {children}
       </div>
     </div>

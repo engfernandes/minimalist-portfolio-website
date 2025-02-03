@@ -12,10 +12,10 @@ interface NavigationMenuProps {
 
 export function NavigationMenu({ items }: NavigationMenuProps) {
   return (
-    <nav className="flex items-center justify-start h-16 w-full">
+    <nav className="flex items-center justify-start h-16 w-max">
       <div className="flex items-center justify-start gap-12">
         <Typography
-          className="text-zinc-600 hover:text-zinc-900 w-full"
+          className="text-zinc-900 hover:text-zinc-900 w-full"
           variant="h3"
           text="Gabriel Fernandes"
         />
