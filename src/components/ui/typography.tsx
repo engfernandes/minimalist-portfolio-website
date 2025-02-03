@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
 
 interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
-  variant: "h1" | "h2" | "h3" | "h4" | "p" | "blockquote" | "inlineCode";
+  variant?: "h1" | "h2" | "h3" | "h4" | "p" | "blockquote" | "inlineCode";
   text: string;
 }
 
@@ -31,10 +31,10 @@ export function Typography({
   ...props
 }: TypographyProps) {
   const Comp =
-    variant === "inlineCode" || variant === "blockquote" ? "p" : variant;
+    variant === "inlineCode" || variant === "blockquote" ? "p" : variant || "p";
   return (
     <Comp
-      className={cn(typographyVariants({ variant: variant, className }))}
+      className={cn(typographyVariants({ variant: variant || "p", className }))}
       {...props}
     >
       {text}
