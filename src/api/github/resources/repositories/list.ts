@@ -17,5 +17,7 @@ interface Params {
 }
 
 export async function list(params: Params) {
-  return await githubInstance.get<Repository[]>("/users/engfernandes/repos");
+  return await githubInstance.get<Repository[]>("/users/engfernandes/repos", {
+    params,
+  });
 }
