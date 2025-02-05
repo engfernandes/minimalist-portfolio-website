@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "experiences" ALTER COLUMN "description" DROP NOT NULL,
+ALTER COLUMN "endDate" DROP NOT NULL,
+ALTER COLUMN "published" DROP NOT NULL,
+ALTER COLUMN "createdAt" DROP NOT NULL,
+ALTER COLUMN "updatedAt" DROP NOT NULL;

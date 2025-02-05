@@ -5,6 +5,8 @@ import { Typography } from "./typography";
 import { usePathname } from "next/navigation";
 import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
+import queryString from "query-string";
 
 interface NavigationMenuItemProps {
   label: string;
@@ -16,7 +18,7 @@ interface NavigationMenuProps {
 }
 
 export function NavigationMenu({ items }: NavigationMenuProps) {
-  const pathName = usePathname();
+  const [hash, setHash] = useState("");
 
   const linkVariants = cva(
     "text-zinc-600 hover:text-zinc-900 w-full cursor-pointer",
@@ -30,25 +32,34 @@ export function NavigationMenu({ items }: NavigationMenuProps) {
     },
   );
 
+  const handleClickLink = (hash: string) => {
+    setHash(hash);
+  };
+
   return (
     <nav className="flex items-center justify-start h-16 w-max">
       <div className="flex items-center justify-start gap-12">
         <Typography
-          className="text-zinc-600  w-full cursor-pointer"
+          className="text-zinc-600 w-full cursor-pointer"
           variant="h3"
           text="Gabriel Fernandes"
         />
         {items.map(({ label, href }, index) => (
-          <Link href={href} key={index} className="relative">
+          <Link
+            href={href}
+            key={index}
+            className="relative"
+            onClick={() => handleClickLink(href)}
+          >
             <Typography
               className={cn(
                 linkVariants({
-                  variant: pathName === href ? "active" : "default",
+                  variant: hash === href ? "active" : "default",
                 }),
               )}
               text={label}
             />
-            {pathName === href && (
+            {hash === href && (
               <span className="h-[4px] w-[4px] bg-zinc-900 rounded-full left-1/2 top-8 absolute" />
             )}
           </Link>
