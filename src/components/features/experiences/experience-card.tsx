@@ -5,16 +5,18 @@ import {
   CardTitle,
   Typography,
 } from "@/components/ui";
-import { ExternalLink } from "lucide-react";
 import { format } from "date-fns";
 import { DATE_FORMAT_SHORT } from "@/constants";
 import lodash from "lodash";
 import Image from "next/image";
+import { Company } from "@prisma/client";
 
 interface ExperienceCardProps {
   title: string;
   description: string;
   dates: string[];
+  company: Company;
+  tags?: string[];
   isLoading?: boolean;
 }
 
@@ -22,6 +24,8 @@ export function ExperienceCard({
   title,
   description,
   dates,
+  company,
+  tags,
   isLoading,
 }: ExperienceCardProps) {
   const formattedDate =
@@ -31,10 +35,10 @@ export function ExperienceCard({
           ?.join(" - ")
       : `${format(new Date(dates[0]), DATE_FORMAT_SHORT)} - Present`;
   const formattedTitle = title
-    ?.split("-")
+    ?.split(" ")
     ?.map((word) => lodash.capitalize(word))
     ?.join(" ");
-  const formmatedDescription =
+  const formatedDescription =
     description?.length > 150
       ? description?.slice(0, 147) + "..."
       : description;
@@ -53,6 +57,21 @@ export function ExperienceCard({
             text={formattedTitle}
             className="tracking-wide"
           />
+          <div className="flex items-center justify-start gap-2">
+            {company.logoUrl && (
+              <Image
+                src={company.logoUrl}
+                alt={`Logo ${company.name}`}
+                width={30}
+                height={30}
+              />
+            )}
+            <Typography
+              variant="p"
+              text={company.name}
+              className="text-zinc font-normal"
+            />
+          </div>
         </CardTitle>
       </CardHeader>
       <CardContent className="grid grid-cols-[1fr_auto] place-items-start gap-14 w-full">
@@ -60,10 +79,21 @@ export function ExperienceCard({
           <Typography
             variant="p"
             className="text-md text-zinc-600"
-            text={formmatedDescription}
+            text={formatedDescription}
           />
         </div>
       </CardContent>
+      <div className="flex flex-wrap items-center justify-start w-fit gap-2">
+        {tags?.map((tag, index) => (
+          <span key={index} className="py-1 px-4 bg-zinc-50 rounded-md">
+            <Typography
+              text={tag}
+              variant="p"
+              className="text-xs text-zinc-600"
+            />
+          </span>
+        ))}
+      </div>
     </Card>
   );
 }

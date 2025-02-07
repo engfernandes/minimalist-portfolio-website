@@ -18,16 +18,54 @@ model Experience {
   title       String    @unique
   description String?
   tags        String[]
-  company     String
   startDate   DateTime
   endDate     DateTime?
   published   Boolean?  @default(true)
   createdAt   DateTime? @default(now())
   updatedAt   DateTime? @updatedAt
 
+  companyId Int
+  company   Company @relation(fields: [companyId], references: [id])
+
   @@index([title])
-  @@index([company])
+  @@index([companyId])
   @@index([startDate])
   @@index([endDate])
   @@map("experiences")
+}
+
+model Project {
+  id          Int       @id @default(autoincrement())
+  title       String    @unique
+  description String?
+  imageUrl    String?
+  startDate   DateTime
+  endDate     DateTime?
+  published   Boolean?  @default(true)
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
+
+  companyId Int
+  company   Company @relation(fields: [companyId], references: [id])
+
+  @@index([title])
+  @@index([startDate])
+  @@index([endDate])
+  @@index([companyId])
+  @@map("projects")
+}
+
+model Company {
+  id          Int          @id @default(autoincrement())
+  name        String
+  description String?
+  logoUrl     String?
+  area        String?
+  createdAt   DateTime?    @default(now())
+  updatedAt   DateTime?    @updatedAt
+  projects    Project[]
+  experiences Experience[]
+
+  @@index([name])
+  @@map("companies")
 }
