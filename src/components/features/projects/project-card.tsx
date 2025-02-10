@@ -16,19 +16,24 @@ import Image from "next/image";
 interface ProjectCardProps {
   title: string;
   description: string;
-  date: string;
-  link: string;
+  dates: string[];
+  link?: string;
   isLoading?: boolean;
 }
 
 export function ProjectCard({
   title,
   description,
-  date,
+  dates,
   link,
   isLoading,
 }: ProjectCardProps) {
-  const formattedDate = format(date, DATE_FORMAT_SHORT);
+  const formattedDate =
+    dates?.length > 1
+      ? dates
+          ?.map((date) => format(new Date(date), DATE_FORMAT_SHORT))
+          ?.join(" - ")
+      : `${format(new Date(dates[0]), DATE_FORMAT_SHORT)} - Present`;
   const formattedTitle = title
     ?.split("-")
     ?.map((word) => lodash.capitalize(word))

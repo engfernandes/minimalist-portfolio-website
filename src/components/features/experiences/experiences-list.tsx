@@ -13,10 +13,10 @@ export async function ExperiencesList() {
 
   return (
     <section
-      className="flex flex-col items-start justify-start gap-2 w-full"
+      className="flex flex-col items-start justify-start gap-1 w-full"
       id="experiences"
     >
-      <Typography text="Experiences" variant="p" className="font-medium" />
+      <Typography text="Experiences" variant="h3" className="font-bold" />
       <section className="flex flex-col items-start justify-start gap-8 w-full">
         {experiences &&
           experiences?.map((experience, index) => (

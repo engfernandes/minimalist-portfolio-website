@@ -37,6 +37,7 @@ model Experience {
 model Project {
   id          Int       @id @default(autoincrement())
   title       String    @unique
+  url         String?
   description String?
   imageUrl    String?
   startDate   DateTime
@@ -52,6 +53,8 @@ model Project {
   @@index([startDate])
   @@index([endDate])
   @@index([companyId])
+  @@index([published])
+  @@index([url])
   @@map("projects")
 }
 

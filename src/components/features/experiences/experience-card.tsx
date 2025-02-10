@@ -62,8 +62,8 @@ export function ExperienceCard({
               <Image
                 src={company.logoUrl}
                 alt={`Logo ${company.name}`}
-                width={30}
-                height={30}
+                width={company.name !== "AFuturaTech" ? 30 : 80}
+                height={company.name !== "AFuturaTech" ? 30 : 80}
               />
             )}
             <Typography

@@ -7,6 +7,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import queryString from "query-string";
+import Image from "next/image";
 
 interface NavigationMenuItemProps {
   label: string;
@@ -39,10 +40,11 @@ export function NavigationMenu({ items }: NavigationMenuProps) {
   return (
     <nav className="flex items-center justify-start h-16 w-max">
       <div className="flex items-center justify-start gap-12">
-        <Typography
-          className="text-zinc-600 w-full cursor-pointer"
-          variant="h3"
-          text="Gabriel Fernandes"
+        <Image
+          src="/images/logo.png"
+          alt="Logo - Gabriel Fernandes"
+          height={100}
+          width={160}
         />
         {items.map(({ label, href }, index) => (
           <Link

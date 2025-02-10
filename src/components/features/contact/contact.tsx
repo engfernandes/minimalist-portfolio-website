@@ -1,16 +1,19 @@
 "use client";
 
 import { Button, Typography } from "@/components/ui";
+import { Github, Icon, Linkedin } from "lucide-react";
 
 export function Contact() {
   const contactItems = [
     {
       label: "LinkedIn",
       url: "https://www.linkedin.com/in/engfernandes",
+      icon: <Linkedin size={16} />,
     },
     {
       label: "GitHub",
       url: "https://www.github.com/engfernandes",
+      icon: <Github size={16} />,
     },
   ];
 
@@ -20,20 +23,23 @@ export function Contact() {
 
   return (
     <footer
-      className="flex flex-col gap-2 items-start justify-center"
-      id="contact"
+      className="flex flex-col gap-4 items-start justify-center"
+      id="contacts"
     >
-      <Typography text="Contact" variant="p" className="font-medium" />
-      <div className="flex items-center justify-start gap-4">
+      <Typography text="Contacts" variant="h3" className="font-bold" />
+      <div className="flex items-center justify-start gap-6">
         {contactItems.map((item, index) => (
-          <Button
-            key={index}
-            variant="link"
-            onClick={() => handleClickContactItem(item.url)}
-            className="p-0"
-          >
-            {item.label}
-          </Button>
+          <div className="flex items-center justify-center gap-2" key={index}>
+            {item.icon}
+            <Button
+              key={index}
+              variant="link"
+              onClick={() => handleClickContactItem(item.url)}
+              className="p-0"
+            >
+              {item.label}
+            </Button>
+          </div>
         ))}
       </div>
     </footer>
